@@ -99,7 +99,7 @@ export class HomePage implements OnInit{
   async showProgressSpinner(){
     const loading = await this.loadingController.create({
       spinner: "bubbles",
-      duration: 5000,
+      // duration: 5000,
       message: 'Loading account, please wait',
       translucent: false,
       backdropDismiss: false

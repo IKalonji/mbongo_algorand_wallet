@@ -1,21 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiServiceService {
 
-  API_URL = 'http://7794-197-184-180-15.ngrok.io';
+  API_URL = environment.url;
 
   username: string = '';
-
   userAccount: string = '';
-
   userContacts: string[] = [];
-
   accountBalance: string = '';
-
   accountAvailableBalance: string = '';
 
   constructor(private http: HttpClient) { }
