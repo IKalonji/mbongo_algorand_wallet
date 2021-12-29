@@ -17,7 +17,7 @@ class MainWallet():
         self.secret = wallet_data['secret']
 
         main_account = create_virtual_currency()
-        if main_account['errorCode']:
+        if 'errorCode' in main_account.keys():
             main_account = get_virtual_currency()
             self.main_account_id = main_account['accountId']
         else:

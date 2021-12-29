@@ -33,9 +33,13 @@ export class AppComponent {
             text: 'Login/Sign-up',
             handler: (alertData) => {
               this.showProgressSpinner();
-              this.apiService.setUsername(alertData.username);
-              this.apiService.getBalance();
-              this.signedIn = true;
+              this.apiService.getUser(alertData.username).subscribe(
+                data => {
+                  console.log(data['account_metadata'].customer_id, data['account_metadata'].id)
+                  this.signedIn = this.apiService.setUsernameAndAccount(data['account_metadata'].customer_id, data['account_metadata'].id)
+                  this.loadingController.dismiss();
+                }
+              );
             }
           },
         ],
@@ -48,12 +52,15 @@ export class AppComponent {
   async showProgressSpinner(){
     const loading = await this.loadingController.create({
       spinner: "bubbles",
-      duration: 5000,
       message: 'Loading account, please wait',
       translucent: false,
-      // cssClass: 'custom-class custom-loading',
       backdropDismiss: false
-    });
+      }
+    );
+    if (this.signedIn == true){
+      loading.dismiss();
+    }
     await loading.present()
   }
+  
 }

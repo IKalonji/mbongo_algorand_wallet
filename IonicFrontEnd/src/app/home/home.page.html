@@ -8,44 +8,54 @@
 
 <ion-content class="background">
   
-  <ion-card style="box-shadow: none !important; border: #72c3fb solid 2px; background-color: #0047ab;" button (click)="getBalAndTransactions()">
+  <ion-card class="glassCard" button (click)="getBalAndTransactions()">
     <ion-card-header>
-      <ion-card-subtitle style="text-align: left; color: antiquewhite;">Welcome {{username}}</ion-card-subtitle>
+      <ion-card-subtitle style="text-align: left; color: white;">Welcome {{username}}</ion-card-subtitle>
       <br>
-      <ion-card-title style="color: antiquewhite; font-size: medium;">Balance:</ion-card-title>
+      <ion-row>
+        <ion-col size="6" style="text-align: center;">
+          <ion-card-title style="color: white; font-size: medium;">Balance:</ion-card-title>
+          <ion-card-subtitle style="font-size: large; color: white;">ZAR {{balance}}</ion-card-subtitle>
+        </ion-col>
+        <ion-col size="6" style="text-align: center;">
+          <ion-card-title style="color: white; font-size: medium;">Available:</ion-card-title>
+          <ion-card-subtitle style="color: white; font-size: large;">ZAR {{available}}</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-card-title style="color: antiquewhite; font-size: medium;">Balance:</ion-card-title>
       <ion-card-subtitle style="text-align: left; font-size: large; color: antiquewhite;">ZAR {{balance}}</ion-card-subtitle>
       <ion-card-title style="color: antiquewhite; font-size: medium;">Available:</ion-card-title>
-      <ion-card-subtitle style="text-align: left; color: antiquewhite; font-size: large;">ZAR {{available}}</ion-card-subtitle>
+      <ion-card-subtitle style="text-align: left; color: antiquewhite; font-size: large;">ZAR {{available}}</ion-card-subtitle> -->
     </ion-card-header>
     <ion-card-content>
       <ion-row>
         <ion-col size="6">
-          <ion-button #cashIn (click)="cashInCashOut('cashin')" expand="block" fill="solid" shape="" color="success">
+          <ion-button #cashIn (click)="cashInCashOut('cashin')" expand="block" fill="solid" shape="" color="medium" class="border-width">
             <ion-label style="font-weight: 500;">Cash In</ion-label>
           </ion-button> 
         </ion-col>
         <ion-col size="6">
-          <ion-button #cashOut (click)="cashInCashOut('cashout')" expand="block" fill="solid" shape="" color="light" >
-            <ion-label style="color: #0047ab;">Cash Out</ion-label>
+          <ion-button #cashOut (click)="cashInCashOut('cashout')" expand="block" fill="solid" shape="" color="light" class="border-width">
+            <ion-label style="color: #e77f2a;">Cash Out</ion-label>
           </ion-button>
         </ion-col>
       </ion-row>  
     </ion-card-content>
   </ion-card>
 
-  <div style="text-align: center;">
+  <div style="text-align: center; font-weight: 600;">
     <ion-label>Start Transaction</ion-label>
   </div>
 
   <ion-grid fixed class="ion-no-padding">
     <ion-row class="ion-no-padding">
       <ion-col size="6" *ngFor="let col of cardRows" class="ion-no-padding">
-        <ion-card button (click)="displayModal(col)" style="height: fit-content;">
+        <ion-card button (click)="displayModal(col)" style="height: fit-content;" class="transactionsGlass">
           <ion-card-content style="text-align: center;">
             <div>
-              <ion-icon slot="start" name="{{col.icon}}" size="large"></ion-icon>
+              <ion-icon slot="start" name="{{col.icon}}" size="large" style="color: black;"></ion-icon>
             </div>
-            <ion-label>{{col.name}}</ion-label>
+            <ion-label style="color: black;">{{col.name}}</ion-label>
           </ion-card-content>
         </ion-card>
       </ion-col>  
@@ -53,7 +63,7 @@
   </ion-grid>
   <br>
   <br>
-  <div style="text-align: center;">
+  <div style="text-align: center; font-weight: 600;">
     <ion-label>Previous Transactions</ion-label>
   </div>
   <div *ngIf="transactionCards.length == 0" style="text-align: center;">
@@ -71,14 +81,14 @@
           <ion-label>Date: {{trans.date}}</ion-label>
         </div>
         <div>
-          <ion-label>Type: {{trans.status}}</ion-label>
+          <ion-label>Type: {{trans.type}}</ion-label>
         </div>
         <div>
           <ion-label>Amount: </ion-label>
-          <ion-label [ngClass]="{'receipt' : tran.amount[0]=='-', 'payment' : tran.amount[0]!='-'}">{{trans.amount}}</ion-label>
+          <ion-label [ngClass]="{'receipt' : trans.amount[0]!='-', 'payment' : trans.amount[0]=='-'}" style="font-weight: 600;">{{trans.amount}}</ion-label>
         </div>
-        <ion-button *ngIf="trans.type == 'ESCROW' " (click)="approve()" expand="block" fill="solid" shape="">
-          <ion-label>{{trans.buttonText}}</ion-label>
+        <ion-button *ngIf="trans.type == 'ESCROW' " (click)="approve(trans)" expand="block" fill="solid" shape="">
+          <ion-label>Approve</ion-label>
         </ion-button>
       </ion-card-content>
     </ion-card>
@@ -96,5 +106,11 @@
   .payment{
     color: red;
   }
+
+  ion-button.border-width{
+    --border-width: 3px;
+  }
+
+  /* style="box-shadow: none !important; border: #72c3fb solid 2px; background-color: #0047ab;" */
 </style>
 

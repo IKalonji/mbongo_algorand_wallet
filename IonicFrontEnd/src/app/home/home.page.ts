@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { HomePageCards } from '../models/home-cards.models';
 import { ApiServiceService } from '../services/api-service.service';
@@ -30,6 +30,7 @@ export class HomePage implements OnInit{
   ngOnInit(): void {
     console.log("home init");
     this.username = this.apiService.username;
+    this.userAccount = this.apiService.userAccount;
     this.getBalAndTransactions();
   }
 
@@ -51,6 +52,7 @@ export class HomePage implements OnInit{
                 this.showProgressSpinner();
                 this.apiService.postTopUp("500").subscribe(data =>{
                   this.getBalAndTransactions();
+                  this.loadingController.dismiss()
                 });
 
               }
@@ -99,7 +101,6 @@ export class HomePage implements OnInit{
   async showProgressSpinner(){
     const loading = await this.loadingController.create({
       spinner: "bubbles",
-      // duration: 5000,
       message: 'Loading account, please wait',
       translucent: false,
       backdropDismiss: false
@@ -107,14 +108,18 @@ export class HomePage implements OnInit{
     await loading.present()
   }
 
-  async approve(){
+  async approve(trans:any){
     let approve = await this.alertController.create({
       header: "Approve Escrow Payment?",
       message: "Please confirm payment sshould be released to receiver",
       buttons:[{
         text: "Confirm",
         handler: ()=>{
-          this.apiService.postEscrowClear('block_id')
+          this.showProgressSpinner()
+          this.apiService.postEscrowClear(trans.counterAccount).subscribe(data => {
+            console.log(data)
+            this.loadingController.dismiss()
+          });
         }
       }, "Cancel"]
     });
@@ -136,14 +141,6 @@ export class HomePage implements OnInit{
     });
   }
 
-  getBalAndTransactions() {
-    this.updateBalance();
-    while(true){
-      if (this.balance){
-        break;
-      }
-    }
-    this.getTransactions();
-  }
+  getBalAndTransactions() { this.updateBalance(); this.getTransactions(); }
 
 }

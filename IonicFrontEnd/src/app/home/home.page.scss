@@ -25,3 +25,23 @@
 #container a {
   text-decoration: none;
 }
+
+.glassCard{
+  /* From https://css.glass */
+  background: rgba(23, 2, 137, 0.28);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(15, 1, 93, 0.721);
+}
+
+.transactionsGlass{
+    /* From https://css.glass */
+  background: rgba(145, 145, 145, 0.149);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1.3px);
+  -webkit-backdrop-filter: blur(1.3px);
+  border: 1px solid rgba(0, 0, 137, 0.843);
+}

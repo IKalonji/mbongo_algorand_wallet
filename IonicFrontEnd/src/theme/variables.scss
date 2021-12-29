@@ -60,7 +60,7 @@
   --ion-color-dark-tint: #383a3e;
 
   /** medium **/
-  --ion-color-medium: #92949c;
+  --ion-color-medium: #e77f2a;
   --ion-color-medium-rgb: 146, 148, 156;
   --ion-color-medium-contrast: #ffffff;
   --ion-color-medium-contrast-rgb: 255, 255, 255;
@@ -74,6 +74,14 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** custombutton **/
+  --ion-color-custombutton: #e77f2a;
+  --ion-color-custombutton-rgb: 244, 245, 248;
+  --ion-color-custombutton-contrast: #000000;
+  --ion-color-custombutton-contrast-rgb: #e77f2a;
+  --ion-color-custombutton-shade: #e77f2a;
+  --ion-color-custombutton-tint: #e77f2a;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { ApiServiceService } from 'src/app/services/api-service.service';
 
 
@@ -13,11 +13,13 @@ export class ScanPaymentComponent implements OnInit {
   
   data: any;
   jsonData: any;
+  amount: string;
 
   constructor(private barcodeScanner: BarcodeScanner,
     private toastController: ToastController,
     private alertPaymentMethod: AlertController,
-    private apiService: ApiServiceService) { } 
+    private apiService: ApiServiceService,
+    private loadingController: LoadingController) { } 
 
   ngOnInit() {
     
@@ -38,29 +40,42 @@ export class ScanPaymentComponent implements OnInit {
   async paymentType(receiver) {
     let alertPaymentMethod = await this.alertPaymentMethod.create(
       {
-        header: "Enter amount and select payment type",
-        inputs:[{
-          name: 'amount',
-          placeholder: 'Enter anount',
-          type: 'text'
-        }],
+        header: "Please select payment type",
         buttons:[{
           text: 'IMMEDIATE',
-          handler: (alertData)=>{
-            this.apiService.postPayment(alertData.amount, receiver)
-            this.showSuccess()
+          handler: ()=>{
+            this.showProgressSpinner();
+            this.apiService.postPayment(this.amount, receiver).subscribe(data => {
+              console.log(data)
+              this.loadingController.dismiss()
+              this.showSuccess()
+            });
           }
         },{
           text: 'ESCROW',
-          handler: (alertData)=>{
-            this.apiService.postEscrowPayment(alertData.amount, receiver)
-            this.showSuccess()
+          handler: ()=>{
+            this.showProgressSpinner()
+            this.apiService.postEscrowPayment(this.amount, receiver).subscribe(data => {
+              console.log(data);
+              this.loadingController.dismiss()
+              this.showSuccess()
+            });
           }
         }
       ]
       }
     )
     await alertPaymentMethod.present()
+  }
+
+  async showProgressSpinner(){
+    const loading = await this.loadingController.create({
+      spinner: "bubbles",
+      message: 'Loading account, please wait',
+      translucent: false,
+      backdropDismiss: false
+    });
+    await loading.present()
   }
 
   async showSuccess(){
