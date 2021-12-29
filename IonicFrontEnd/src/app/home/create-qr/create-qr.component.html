@@ -1,0 +1,27 @@
+
+<ion-content>
+  <div *ngIf="!showQRCode" style="text-align: center;">  
+    <ion-button (click)="showQR()" expand="block" fill="solid" shape="round">
+      Show account QR
+    </ion-button>
+  </div>
+  <div style="text-align: center; height: 100%; width: 100%;" *ngIf="showQRCode">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Allow sender to scan</ion-card-subtitle>
+        <br>
+        <ion-card-title>QR Code:</ion-card-title>
+      </ion-card-header>
+      <br>
+      <ion-card-content>
+        <ngx-qrcode
+        [elementType]="elementType"
+        [errorCorrectionLevel]="correctionLevel"
+        [value]="value">
+        </ngx-qrcode>
+      </ion-card-content>
+    </ion-card>  
+  </div>
+</ion-content>
+
+

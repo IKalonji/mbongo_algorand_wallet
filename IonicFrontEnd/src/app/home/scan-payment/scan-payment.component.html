@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar >
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div style="text-align: center;">
+    <ion-label>Transaction amount</ion-label>
+  </div>
+  <ion-card>
+    <ion-card-content>
+      <ion-label>Please enter amount to transfer/cash out.</ion-label>
+      <ion-input type="text" placeholder="amount"></ion-input>
+    </ion-card-content>
+  </ion-card>
+  <ion-button (click)="scanner()" expand="block" fill="outline" shape="round">
+    <ion-label>Proceed</ion-label>
+  </ion-button>
+</ion-content>

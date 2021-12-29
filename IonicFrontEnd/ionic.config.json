@@ -1,0 +1,7 @@
+{
+  "name": "Mbongo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
