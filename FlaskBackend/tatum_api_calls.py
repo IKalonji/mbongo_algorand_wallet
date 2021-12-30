@@ -6,15 +6,15 @@ from user import User
 from random import randint
 import time
 
-dotenv.load_dotenv()
-api_key = getenv('API_KEY')
+# dotenv.load_dotenv()
+# api_key = getenv('API_KEY')
 
 #Dict of created accounts
 accounts_dict = {}
 account_number = 00000
 
 #Tatum request API calls
-def create_user_account(username):
+def create_user_account(username, api_key):
     #create user account
     global account_number
     account_number += 1
@@ -34,14 +34,14 @@ def create_user_account(username):
     #return user
     return user_object.user
 
-def get_contacts(username):
+def get_contacts(username, api_key):
     #search user in the user dict
     user = accounts_dict[username]
     #return the users contacts
     print('User contacts: ', user.user['contacts'])
     return user.user['contacts']
 
-def get_balance(account_id):
+def get_balance(account_id, api_key):
     #call balance request
     conn = http.client.HTTPSConnection("api-eu1.tatum.io")
     headers = { 'x-api-key': api_key }
@@ -53,7 +53,7 @@ def get_balance(account_id):
     #return balance
     return balance_data
 
-def get_transactions(account_id):
+def get_transactions(account_id, api_key):
     #call transactions request
     conn = http.client.HTTPSConnection("api-eu1.tatum.io")
     payload = "{\"id\":\""+account_id+"\"}"
@@ -98,7 +98,7 @@ def get_transactions(account_id):
     #return parsed transaction list
     return parsed_response_data
 
-def account_top_up(account_id, amount, wallet):
+def account_top_up(account_id, amount, wallet, api_key):
     #call transfer from main account to user account
     payment_id = randint(1000,9999)
     conn = http.client.HTTPSConnection("api-eu1.tatum.io")
@@ -114,7 +114,7 @@ def account_top_up(account_id, amount, wallet):
     #return transaction details.
     return json.loads(data.decode("utf-8"))
 
-def payment_transfer(account_id, request_body):
+def payment_transfer(account_id, request_body, api_key):
     #parse receiver details from body
     receiver = request_body['receiver']
     amount = request_body['amount']
@@ -134,7 +134,7 @@ def payment_transfer(account_id, request_body):
     #return transaction details.
     return json.loads(data.decode("utf-8"))
 
-def escrow_payment(account_id, request_body):
+def escrow_payment(account_id, request_body, api_key):
     #parse receiver details from body
     amount = request_body["amount"]
     receiver = request_body["receiver"]
@@ -157,7 +157,7 @@ def escrow_payment(account_id, request_body):
     else:
         return  {"error": "could not block account"}
 
-def escrow_clear_amount(account_id, request_body):
+def escrow_clear_amount(account_id, request_body, api_key):
     #parse the receiver details
     receiver_id = request_body["receiver"]
     #unblock the amount in the receivers wallet
