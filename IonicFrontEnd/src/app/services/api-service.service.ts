@@ -1,21 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import { HTTP } from '@awesome-cordova-plugins/http/ngx';
+import { Platform } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiServiceService {
 
-  API_URL = environment.url;
-
+  API_URL: string;
   username: string = '';
   userAccount: string = '';
   userContacts: string[] = [];
   accountBalance: string = '';
   accountAvailableBalance: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private platform: Platform) {
+      console.log(platform.platforms())
+      if(platform.is("android")){
+        this.API_URL = environment.urlDeployed;
+      } else {
+        this.API_URL = environment.urlLocal;
+      }
+    }
 
   setUsernameAndAccount(username:string, account:string){this.username = username; this.userAccount = account; return true;}
 
@@ -25,7 +34,7 @@ export class ApiServiceService {
     let response;
     this.http.get(this.API_URL+`/contacts/`+this.username).subscribe(data => {
       response = data
-      console.log(response)
+      // console.log(response)
     });
   }
 
@@ -61,7 +70,6 @@ export class ApiServiceService {
   }
 
   postEscrowClear(receiverId: string) {
-    let response;
     let body = {
       "receiver": receiverId,
     }

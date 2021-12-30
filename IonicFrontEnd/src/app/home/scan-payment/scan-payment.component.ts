@@ -28,12 +28,12 @@ export class ScanPaymentComponent implements OnInit {
   scanner(){
     this.data = null;
     this.barcodeScanner.scan().then(barcodeData => {
-      console.log('Barcode data', barcodeData);
+      // console.log('Barcode data', barcodeData);
       this.data = barcodeData;
       this.jsonData = JSON.parse(this.data);
       this.paymentType(this.jsonData.receiver)
     }).catch(err => {
-      console.log('Error', err);
+      // console.log('Error', err);
     });
   }
 
@@ -46,7 +46,7 @@ export class ScanPaymentComponent implements OnInit {
           handler: ()=>{
             this.showProgressSpinner();
             this.apiService.postPayment(this.amount, receiver).subscribe(data => {
-              console.log(data)
+              // console.log(data)
               this.loadingController.dismiss()
               this.showSuccess()
             });
@@ -56,7 +56,7 @@ export class ScanPaymentComponent implements OnInit {
           handler: ()=>{
             this.showProgressSpinner()
             this.apiService.postEscrowPayment(this.amount, receiver).subscribe(data => {
-              console.log(data);
+              // console.log(data);
               this.loadingController.dismiss()
               this.showSuccess()
             });

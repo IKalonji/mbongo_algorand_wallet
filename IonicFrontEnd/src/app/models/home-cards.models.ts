@@ -10,7 +10,7 @@ export const HomePageCards = [
     },
     {
         icon: "qr-code-outline",
-        name: "Create QR",
+        name: "Show Pay QR",
         component: CreateQrComponent
     },
 ]

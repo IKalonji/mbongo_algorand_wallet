@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url: "http://7641-197-184-180-15.ngrok.io",
+  urlLocal: "http://0a6c-197-184-183-154.ngrok.io",
+  urlDeployed: "https://mbongo-algo-wallet.herokuapp.com/"
 };
 
 /*

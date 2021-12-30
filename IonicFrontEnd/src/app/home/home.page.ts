@@ -28,7 +28,7 @@ export class HomePage implements OnInit{
   ) {}
   
   ngOnInit(): void {
-    console.log("home init");
+    // console.log("home init");
     this.username = this.apiService.username;
     this.userAccount = this.apiService.userAccount;
     this.getBalAndTransactions();
@@ -117,7 +117,7 @@ export class HomePage implements OnInit{
         handler: ()=>{
           this.showProgressSpinner()
           this.apiService.postEscrowClear(trans.counterAccount).subscribe(data => {
-            console.log(data)
+            // console.log(data)
             this.loadingController.dismiss()
           });
         }
@@ -129,13 +129,13 @@ export class HomePage implements OnInit{
   getTransactions() {
     let transactions = this.apiService.getTransactions().subscribe(data =>{
       this.transactionCards = data['transactions'];
-      console.log(transactions);
+      // console.log(transactions);
     });
   }
 
   updateBalance() {
     this.balanceData = this.apiService.getBalance().subscribe(data =>{
-      console.log(data)
+      // console.log(data)
       this.balance = data['balance'].accountBalance;
       this.available = data['balance'].availableBalance;
     });

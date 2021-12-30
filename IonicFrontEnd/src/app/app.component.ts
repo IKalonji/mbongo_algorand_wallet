@@ -35,7 +35,7 @@ export class AppComponent {
               this.showProgressSpinner();
               this.apiService.getUser(alertData.username).subscribe(
                 data => {
-                  console.log(data['account_metadata'].customer_id, data['account_metadata'].id)
+                  // console.log(data['account_metadata'].customer_id, data['account_metadata'].id)
                   this.signedIn = this.apiService.setUsernameAndAccount(data['account_metadata'].customer_id, data['account_metadata'].id)
                   this.loadingController.dismiss();
                 }

@@ -22,7 +22,7 @@ export class CreateQrComponent implements OnInit {
   // Need to specify the valid account address
   value : string = '';
 
-  constructor(private toastController: ToastController, private apiService: ApiServiceService) { }
+  constructor(private toastController: ToastController, private apiService: ApiServiceService) { this.showQR()}
 
   ngOnInit() {}
 

@@ -26,6 +26,7 @@ def user(username):
             "result": "OK",
             "account_metadata": user
         }
+    print("ready to return user")
     return jsonify(response), 200
 
 @app.route('/contacts/<username>', methods=['GET'])
@@ -35,6 +36,7 @@ def contacts(username):
             "result": "OK",
             "user_contacts": contacts
         }
+    print("ready to return user")
     return jsonify(response), 200
 
 @app.route('/balance/<username>', methods=['GET'])
@@ -45,6 +47,7 @@ def balance(username):
         "result": "OK",
         "balance": balance_data
     }
+    print("ready to return balance")
     return jsonify(response), 200
 
 @app.route('/transactions/<username>', methods=['GET'])
@@ -55,6 +58,7 @@ def transactions(username):
         "result": "OK",
         "transactions": transaction_data
     }
+    print("ready to return transactions")
     return jsonify(response), 200
 
 @app.route('/top-up/<username>', methods=['POST'])
@@ -67,6 +71,7 @@ def top_up(username):
         "transactions": top_up_data,
         "balance": get_balance(account_id)
     }
+    print("ready to return top up")
     return jsonify(response), 200
 
 @app.route('/payment/<username>', methods=['POST'])
@@ -79,6 +84,7 @@ def payment(username):
         "transaction": payment_data,
         "balance": get_balance(account_id)
     }
+    print("ready to return payment")
     return jsonify(response), 200
 
 @app.route('/escrow-pay/<username>', methods=['POST'])
@@ -91,6 +97,7 @@ def escrow_pay(username):
         "transaction": escrow_pay_data,
         "balance": get_balance(account_id)
     }
+    print("ready to return escrow data")
     return jsonify(response), 200
 
 @app.route('/escrow-clear/<username>', methods=['POST'])
@@ -103,6 +110,7 @@ def escrow_clear(username):
         "transaction": escrow_clear_data,
         "balance": get_balance(account_id)
     }
+    print("ready to return escrow clear")
     return jsonify(response), 200
 
 @app.route('/ussd', methods = ['GET', 'POST'])
