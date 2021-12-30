@@ -118,14 +118,14 @@ def ussd_request():
     #process ussd requests
     pass
 
-def start_ngrok():
-    from pyngrok import ngrok
-    url = ngrok.connect(5000).public_url
-    print(' * Tunnel URL:', url)
+# def start_ngrok():
+#     # from pyngrok import ngrok
+#     url = ngrok.connect(5000).public_url
+#     print(' * Tunnel URL:', url)
 
 #main run function
 if __name__ == "__main__":
-    start_ngrok()
+    # start_ngrok()
     app.run(host='0.0.0.0')
 
 
