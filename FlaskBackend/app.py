@@ -126,6 +126,6 @@ def ussd_request():
 #main run function
 if __name__ == "__main__":
     # start_ngrok()
-    app.run(host='0.0.0.0')
+    app.run(debug=True)
 
 
