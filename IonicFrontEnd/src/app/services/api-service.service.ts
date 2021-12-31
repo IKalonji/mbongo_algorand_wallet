@@ -22,7 +22,7 @@ export class ApiServiceService {
         this.API_URL = environment.urlDeployed;
       } else {
         this.API_URL = environment.urlLocal;
-      }
+      }   
     }
 
   setUsernameAndAccount(username:string, account:string){this.username = username; this.userAccount = account; return true;}
