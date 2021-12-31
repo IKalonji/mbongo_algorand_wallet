@@ -31,6 +31,7 @@ def key_added():
 #Application endpoints
 @app.route('/user/<username>', methods=['GET'])
 def user(username):
+    global wallet
     user = None
     if (username.lower() in accounts_dict.keys()):
         user = accounts_dict[username].user
@@ -45,6 +46,7 @@ def user(username):
 
 @app.route('/contacts/<username>', methods=['GET'])
 def contacts(username):
+    global wallet
     contacts = get_contacts(username, wallet.key)
     response = {
             "result": "OK",
@@ -55,6 +57,7 @@ def contacts(username):
 
 @app.route('/balance/<username>', methods=['GET'])
 def balance(username):
+    global wallet
     account_id = accounts_dict[username].user["account_id"]
     balance_data = get_balance(account_id, wallet.key)
     response = {
@@ -66,6 +69,7 @@ def balance(username):
 
 @app.route('/transactions/<username>', methods=['GET'])
 def transactions(username):
+    global wallet
     account_id = accounts_dict[username].user["account_id"]
     transaction_data = get_transactions(account_id, wallet.key)
     response = {
@@ -77,6 +81,7 @@ def transactions(username):
 
 @app.route('/top-up/<username>', methods=['POST'])
 def top_up(username):
+    global wallet
     request_body = request.get_json(force=True)
     account_id = accounts_dict[username].user["account_id"]
     top_up_data = account_top_up(account_id, request_body['amount'], wallet)
@@ -90,6 +95,7 @@ def top_up(username):
 
 @app.route('/payment/<username>', methods=['POST'])
 def payment(username):
+    global wallet
     request_body = request.get_json(force=True)
     account_id = accounts_dict[username].user["account_id"]
     payment_data = payment_transfer(account_id, request_body, wallet.key)
@@ -103,6 +109,7 @@ def payment(username):
 
 @app.route('/escrow-pay/<username>', methods=['POST'])
 def escrow_pay(username):
+    global wallet
     request_body = request.get_json(force=True)
     account_id = accounts_dict[username].user["account_id"]
     escrow_pay_data = escrow_payment(account_id, request_body, wallet.key)
@@ -116,6 +123,7 @@ def escrow_pay(username):
 
 @app.route('/escrow-clear/<username>', methods=['POST'])
 def escrow_clear(username):
+    global wallet
     request_body = request.get_json(force=True)
     account_id = accounts_dict[username].user["account_id"]
     escrow_clear_data = escrow_clear_amount(account_id, request_body, wallet.key)
