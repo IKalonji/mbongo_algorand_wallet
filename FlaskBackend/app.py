@@ -2,31 +2,39 @@ from flask import Flask, request, render_template
 from flask.json import jsonify
 from main_wallet_create import MainWallet
 from tatum_api_calls import *
+from boto.s3.connection import S3Connection
+import os
+
+
+api_key = S3Connection(os.environ['API_KEY'])
 
 #Initialise flask app
 app = Flask(__name__)
 
+#get deployed instance API_KEY
+
+
 #Initialise main wallet
-global wallet
+wallet = MainWallet(api_key)
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
-@app.route('/key-added', methods=["POST","GET"])
-def key_added():
-    global wallet
-    if request.method == 'GET':
-        return f"The URL /data is accessed directly. Try going to '/' to submit form with API_KEY"
-    if request.method == 'POST':
-        form_data = request.form
-        print(form_data)
-        key = form_data['API_KEY']
-        if key:
-            wallet = MainWallet(key)
-        else:
-            return 'Cannot initialise app'
-        return 'Key added, you can now interact with the api using the mobile app'
+# @app.route('/key-added', methods=["POST","GET"])
+# def key_added():
+#     global wallet
+#     if request.method == 'GET':
+#         return f"The URL /data is accessed directly. Try going to '/' to submit form with API_KEY"
+#     if request.method == 'POST':
+#         form_data = request.form
+#         print(form_data)
+#         key = form_data['API_KEY']
+#         if key:
+            
+#         else:
+#             return 'Cannot initialise app'
+#         return 'Key added, you can now interact with the api using the mobile app'
 
 
 #Application endpoints

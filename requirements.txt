@@ -1,3 +1,4 @@
+boto==2.49.0
 certifi==2021.10.8
 charset-normalizer==2.0.9
 click==8.0.3
