@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
 import { ApiServiceService } from './services/api-service.service';
 
 @Component({
@@ -13,14 +13,20 @@ export class AppComponent {
 
   constructor(public loadingController: LoadingController,
     private alertController: AlertController,
-    private apiService: ApiServiceService) {
+    private apiService: ApiServiceService,
+    private platform: Platform) {
       this.setAccount()
     }
 
   async setAccount(){
+    let platformStrings = '';
+    this.platform.platforms().forEach(element => {
+      platformStrings += element;
+    });
     let select = await this.alertController.create(
       {
         header: "Cellphone Number:",
+        subHeader: platformStrings,
         inputs: [
           {
             name: 'username',
