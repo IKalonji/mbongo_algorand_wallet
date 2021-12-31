@@ -98,14 +98,14 @@ def get_transactions(account_id, api_key):
     #return parsed transaction list
     return parsed_response_data
 
-def account_top_up(account_id, amount, wallet, api_key):
+def account_top_up(account_id, amount, wallet):
     #call transfer from main account to user account
     payment_id = randint(1000,9999)
     conn = http.client.HTTPSConnection("api-eu1.tatum.io")
     payload = "{\"senderAccountId\":\""+wallet.main_account_id+"\",\"recipientAccountId\":\""+account_id+"\",\"amount\":\""+str(amount)+"\",\"anonymous\":false,\"compliant\":false,\"transactionCode\":\"TRANSFER\",\"paymentId\":\""+str(payment_id)+"\",\"recipientNote\":\"TOP-UP\",\"baseRate\":1,\"senderNote\":\"TOP-UP\"}"
     headers = {
         'content-type': "application/json",
-        'x-api-key': api_key
+        'x-api-key': wallet.key
         }
     conn.request("POST", "/v3/ledger/transaction", payload, headers)
     res = conn.getresponse()

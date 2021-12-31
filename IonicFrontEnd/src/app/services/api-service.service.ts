@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import { Platform } from '@ionic/angular';
 
@@ -9,6 +9,7 @@ import { Platform } from '@ionic/angular';
 export class ApiServiceService {
 
   API_URL: string;
+  API_KEY: string;;
   username: string = '';
   userAccount: string = '';
   userContacts: string[] = [];
@@ -17,15 +18,20 @@ export class ApiServiceService {
 
   constructor(private http: HttpClient,
     private platform: Platform) {
-      console.log(platform.platforms())
+      console.log(this.platform.platforms())
       if(platform.is("android")){
         this.API_URL = environment.urlDeployed;
       } else {
         this.API_URL = environment.urlLocal;
+        this.API_KEY = environment.API_KEY;
       }   
     }
 
   setUsernameAndAccount(username:string, account:string){this.username = username; this.userAccount = account; return true;}
+
+  initializeFrontendWithTatumAPI_KEY(){
+    return this.http.get(this.API_URL+'/initialize', {headers:{'x-api-key':this.API_KEY}})
+  }
 
   getUser(username:string) { return this.http.get(this.API_URL+`/user/`+username); }
 

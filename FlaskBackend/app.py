@@ -1,45 +1,34 @@
 from flask import Flask, request, render_template
 from flask.json import jsonify
+from flask_cors.decorator import cross_origin
 from main_wallet_create import MainWallet
 from tatum_api_calls import *
-from boto.s3.connection import S3Connection
-import dotenv
-import os
-
-
-api_key = os.environ.get('API_KEY', None)
-if not api_key:
-    dotenv.load_dotenv()
-    api_key = getenv('API_KEY')
-
-print(api_key)
+from flask_cors import CORS
 
 #Initialise flask app
 app = Flask(__name__)
+CORS(app)
+app.config['CORS_HEADERS'] = 'x-api-key'
 
 #Initialise main wallet
-wallet = MainWallet(api_key)
+wallet = MainWallet()
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
-# @app.route('/key-added', methods=["POST","GET"])
-# def key_added():
-#     global wallet
-#     if request.method == 'GET':
-#         return f"The URL /data is accessed directly. Try going to '/' to submit form with API_KEY"
-#     if request.method == 'POST':
-#         form_data = request.form
-#         print(form_data)
-#         key = form_data['API_KEY']
-#         if key:
-            
-#         else:
-#             return 'Cannot initialise app'
-#         return 'Key added, you can now interact with the api using the mobile app'
-
-
+@app.route('/initialize', methods=['GET'])
+@cross_origin()
+def initialize():
+    global wallet
+    print(request.headers)
+    if 'X-Api-Key' not in request.headers.keys():
+        return jsonify({'response': 'error', 'message': 'no api key present'}), 401
+    else:
+        if wallet.key == "":
+            wallet.key = request.headers['X-Api-Key']
+            wallet.initialize_wallet()
+        return jsonify({'response': 'OK', 'message': 'Initialized successfully'}), 200
 
 #Application endpoints
 @app.route('/user/<username>', methods=['GET'])
@@ -154,12 +143,12 @@ def ussd_request():
     pass
 
 #for local testing
-# def start_ngrok():
-#     # from pyngrok import ngrok
-#     url = ngrok.connect(5000).public_url
-#     print(' * Tunnel URL:', url)
+def start_ngrok():
+    from pyngrok import ngrok
+    url = ngrok.connect(5000).public_url
+    print(' * Tunnel URL:', url)
 
 #main run function
 if __name__ == "__main__":
-    # start_ngrok()
+    start_ngrok()
     app.run(debug=False)

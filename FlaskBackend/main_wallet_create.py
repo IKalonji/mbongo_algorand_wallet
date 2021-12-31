@@ -8,8 +8,10 @@ from flask import json
 
 class MainWallet():
 
-    def __init__(self, api_key):
-        self.key = api_key
+    def __init__(self):
+        self.key = ""
+
+    def initialize_wallet(self):
         wallet_data = create_wallet(self.key)
         print("Wallet-data: ", wallet_data)
         self.address = wallet_data['address']
@@ -21,9 +23,6 @@ class MainWallet():
         else:
             self.main_account_id = main_account['id']
         print("Main-account-data: ", main_account)
-
-    def return_api_key(self):
-        return self.key
         
 def create_wallet(api_key):
     conn = http.client.HTTPSConnection("api-eu1.tatum.io")
