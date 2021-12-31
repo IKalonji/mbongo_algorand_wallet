@@ -3,16 +3,19 @@ from flask.json import jsonify
 from main_wallet_create import MainWallet
 from tatum_api_calls import *
 from boto.s3.connection import S3Connection
+import dotenv
 import os
 
 
-api_key = S3Connection(os.environ['API_KEY'])
+api_key = os.environ.get('API_KEY', None)
+if not api_key:
+    dotenv.load_dotenv()
+    api_key = getenv('API_KEY')
+
+print(api_key)
 
 #Initialise flask app
 app = Flask(__name__)
-
-#get deployed instance API_KEY
-
 
 #Initialise main wallet
 wallet = MainWallet(api_key)
@@ -35,6 +38,7 @@ def home():
 #         else:
 #             return 'Cannot initialise app'
 #         return 'Key added, you can now interact with the api using the mobile app'
+
 
 
 #Application endpoints
@@ -158,4 +162,4 @@ def ussd_request():
 #main run function
 if __name__ == "__main__":
     # start_ngrok()
-    app.run(debug=True)
+    app.run(debug=False)
