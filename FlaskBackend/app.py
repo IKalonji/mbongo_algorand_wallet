@@ -7,6 +7,7 @@ from tatum_api_calls import *
 app = Flask(__name__)
 
 #Initialise main wallet
+global wallet
 
 @app.route('/')
 def home():
@@ -14,6 +15,7 @@ def home():
 
 @app.route('/key-added', methods=["POST","GET"])
 def key_added():
+    global wallet
     if request.method == 'GET':
         return f"The URL /data is accessed directly. Try going to '/' to submit form with API_KEY"
     if request.method == 'POST':
@@ -21,7 +23,6 @@ def key_added():
         print(form_data)
         key = form_data['API_KEY']
         if key:
-            global wallet
             wallet = MainWallet(key)
         else:
             return 'Cannot initialise app'
