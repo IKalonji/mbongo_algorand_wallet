@@ -7,7 +7,7 @@
     <ion-item *ngFor="let contact of contactList">
       <ion-label>User: {{contact.name}}</ion-label>
       <ion-label>Account: {{contact.account}}</ion-label>
-      <ion-button (click)="payAgain()" expand="block" fill="solid" shape="round" size="small">
+      <ion-button (click)="payAgain(contact)" expand="block" fill="solid" shape="round" size="small">
         Pay Contact
       </ion-button>
     </ion-item>

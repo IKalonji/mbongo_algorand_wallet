@@ -43,7 +43,7 @@ export class ContactsComponent implements OnInit {
             handler: (alertData) => {
               this.apiService.postPayment(alertData.amount, userToPay['account'], userToPay['name']).subscribe(data =>
                 {
-
+                  this.toastPayment();
                 }
               )
             }
