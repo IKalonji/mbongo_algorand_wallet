@@ -10,8 +10,6 @@ import { ApiServiceService } from 'src/app/services/api-service.service';
   styleUrls: ['./create-qr.component.scss'],
 })
 export class CreateQrComponent implements OnInit {
-  
-  showQRCode = false;
 
   // We can have Canvas/Img/Url as elementType
   elementType = NgxQrcodeElementTypes.URL;
@@ -31,7 +29,7 @@ export class CreateQrComponent implements OnInit {
       receiver: this.apiService.userAccount,
     };
     this.value = JSON.stringify(QRMetaData);
-    this.showQRCode = true;
+    console.log(this.value)
   }
 
 }

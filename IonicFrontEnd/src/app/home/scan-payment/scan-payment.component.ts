@@ -46,7 +46,7 @@ export class ScanPaymentComponent implements OnInit {
           handler: ()=>{
             this.showProgressSpinner();
             this.apiService.postPayment(this.amount, receiver).subscribe(data => {
-              // console.log(data)
+              console.log(data)
               this.loadingController.dismiss()
               this.showSuccess()
             });
@@ -56,7 +56,7 @@ export class ScanPaymentComponent implements OnInit {
           handler: ()=>{
             this.showProgressSpinner()
             this.apiService.postEscrowPayment(this.amount, receiver).subscribe(data => {
-              // console.log(data);
+              console.log(data);
               this.loadingController.dismiss()
               this.showSuccess()
             });

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import { Platform } from '@ionic/angular';
+import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -18,30 +19,19 @@ export class ApiServiceService {
 
   constructor(private http: HttpClient,
     private platform: Platform) {
-      console.log(this.platform.platforms())
-      if(platform.is("android")){
-        this.API_URL = environment.urlDeployed;
-      } else {
-        this.API_URL = environment.urlLocal;
-        this.API_KEY = environment.API_KEY;
-      }   
+      this.API_URL = environment.urlLocal;
+      this.API_KEY = environment.API_KEY;  
     }
 
   setUsernameAndAccount(username:string, account:string){this.username = username; this.userAccount = account; return true;}
 
   initializeFrontendWithTatumAPI_KEY(){
-    return this.http.get(this.API_URL+'/initialize', {headers:{'x-api-key':this.API_KEY}})
+    return this.http.get(this.API_URL+'/initialize',{headers:{'x-api-key':String(this.API_KEY)}})
   }
 
   getUser(username:string) { return this.http.get(this.API_URL+`/user/`+username); }
 
-  getContacts() {
-    let response;
-    this.http.get(this.API_URL+`/contacts/`+this.username).subscribe(data => {
-      response = data
-      // console.log(response)
-    });
-  }
+  getContacts() { return this.http.get(this.API_URL+`/contacts/`+this.username) }
 
   getBalance() {
     return this.http.get(this.API_URL+`/balance/`+this.username)
@@ -52,7 +42,7 @@ export class ApiServiceService {
   }
 
   postTopUp(topUpAmount: string) {
-    let body = { "amount": topUpAmount }
+    let body = { "amount": topUpAmount };
     return this.http.post(this.API_URL+`/top-up/`+this.username, body);
   }
 

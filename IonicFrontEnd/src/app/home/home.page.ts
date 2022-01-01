@@ -51,6 +51,7 @@ export class HomePage implements OnInit{
               handler: () => {
                 this.showProgressSpinner();
                 this.apiService.postTopUp("500").subscribe(data =>{
+                  console.log(data)
                   this.getBalAndTransactions();
                   this.loadingController.dismiss()
                 });
@@ -117,7 +118,7 @@ export class HomePage implements OnInit{
         handler: ()=>{
           this.showProgressSpinner()
           this.apiService.postEscrowClear(trans.counterAccount).subscribe(data => {
-            // console.log(data)
+            console.log(data)
             this.loadingController.dismiss()
           });
         }

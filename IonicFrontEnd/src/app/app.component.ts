@@ -27,19 +27,16 @@ export class AppComponent {
       if (result.toLowerCase() == 'ok'){
         this.loadingController.dismiss();
         this.setAccount();
+      }else{ 
+        this.showProgressSpinner('An error occurred, close the app!')
       }
     })
   }
 
   async setAccount(){
-    let platformStrings = '';
-    this.platform.platforms().forEach(element => {
-      platformStrings += element;
-    });
     let select = await this.alertController.create(
       {
         header: "Cellphone Number:",
-        subHeader: platformStrings,
         inputs: [
           {
             name: 'username',
@@ -54,8 +51,7 @@ export class AppComponent {
               this.showProgressSpinner('Loading account, please wait');
               this.apiService.getUser(alertData.username).subscribe(
                 data => {
-                  // console.log(data['account_metadata'].customer_id, data['account_metadata'].id)
-                  this.signedIn = this.apiService.setUsernameAndAccount(data['account_metadata'].customer_id, data['account_metadata'].id)
+                  this.signedIn = this.apiService.setUsernameAndAccount(data['account_metadata'].customer_id, data['account_metadata'].account_id)
                   this.loadingController.dismiss();
                 }
               );
