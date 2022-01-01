@@ -7,6 +7,13 @@
 </ion-header>
 
 <ion-content class="background">
+
+  <!-- FAB BUTTON TO DISPLAY USERS CONTACTS -->
+  <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+    <ion-fab-button color="medium" (click)="displayModal('contacts')">
+      <ion-icon name="people-outline" style="color: white;" size="medium"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   
   <ion-card class="glassCard" button (click)="getBalAndTransactions()">
     <ion-card-header>

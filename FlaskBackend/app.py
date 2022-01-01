@@ -49,7 +49,7 @@ def user(username):
 @app.route('/contacts/<username>', methods=['GET'])
 def contacts(username):
     global wallet
-    contacts = get_contacts(username, wallet.key)
+    contacts = get_contacts(username)
     response = {
             "result": "OK",
             "user_contacts": contacts
@@ -106,6 +106,17 @@ def payment(username):
         "transaction": payment_data,
         "balance": get_balance(account_id, wallet.key)
     }
+
+    #Add as a contact to both parties:
+    #Add to receiver
+    payee = accounts_dict[username]
+    payee_contacts = payee.add_contact(request_body['receiver'], request_body['username'])
+    print('payee contacts: ', payee_contacts)
+    #Add to sender
+    payer = accounts_dict[request_body['username']]
+    payer_contacts = payer.add_contact(account_id,username)
+    print('Payer contacts: ', payer_contacts)
+
     print("ready to return payment")
     return jsonify(response), 200
 
@@ -120,6 +131,17 @@ def escrow_pay(username):
         "transaction": escrow_pay_data,
         "balance": get_balance(account_id, wallet.key)
     }
+
+    #Add as a contact to both parties:
+    #Add to receiver
+    payee = accounts_dict[username]
+    payee_contacts = payee.add_contact(request_body['receiver'], request_body['username'])
+    print('Payee contacts: ', payee_contacts)
+    #Add to sender
+    payer = accounts_dict[request_body['username']]
+    payer_contacts = payer.add_contact(account_id,username)
+    print('Payer contacts: ', payer_contacts)
+
     print("ready to return escrow data")
     return jsonify(response), 200
 
@@ -139,7 +161,7 @@ def escrow_clear(username):
 
 @app.route('/ussd', methods = ['GET', 'POST'])
 def ussd_request():
-    #process ussd requests
+    #NEXT ITERATION (process ussd requests)
     pass
 
 #for local testing

@@ -27,6 +27,7 @@ export class CreateQrComponent implements OnInit {
   showQR(){
     let QRMetaData = {
       receiver: this.apiService.userAccount,
+      username: this.apiService.username
     };
     this.value = JSON.stringify(QRMetaData);
     console.log(this.value)

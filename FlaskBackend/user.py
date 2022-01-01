@@ -12,7 +12,9 @@ class User():
 
     def add_contact(self, customer_id, account_id):
         contact = {
-            "name": customer_id,
-            "account": account_id
+            "account": customer_id,
+            "name": account_id
         }
-        self.user['contacts'].append(contact)
+        if not contact in self.user['contacts']:
+            self.user['contacts'].append(contact)
+        return self.user.get('contacts')

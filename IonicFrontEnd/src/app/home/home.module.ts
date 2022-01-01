@@ -5,15 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
-
 import { CreateQrComponent } from './create-qr/create-qr.component';
 import { ScanPaymentComponent } from './scan-payment/scan-payment.component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-
-
 import { HttpClientModule } from '@angular/common/http';
+import { ContactsComponent } from './contacts/contacts.component';
 
 
 @NgModule({
@@ -23,9 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
     IonicModule,
     HomePageRoutingModule,
     NgxQRCodeModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  declarations: [HomePage,CreateQrComponent,ScanPaymentComponent,],
+  declarations: [HomePage,CreateQrComponent,ScanPaymentComponent,ContactsComponent],
   providers: [BarcodeScanner]
 })
 export class HomePageModule {}

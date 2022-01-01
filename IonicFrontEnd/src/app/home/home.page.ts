@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { HomePageCards } from '../models/home-cards.models';
 import { ApiServiceService } from '../services/api-service.service';
+import { ContactsComponent } from './contacts/contacts.component';
 
 @Component({
   selector: 'app-home',
@@ -81,9 +82,15 @@ export class HomePage implements OnInit{
   }
 
   async displayModal(row:any){
+    let componentToLoad;
+    if (row == 'contacts'){
+      componentToLoad = ContactsComponent
+    }else{
+      componentToLoad = row.component
+    }
     const account = await this.modalController.create(
       {
-        component: row.component,
+        component: componentToLoad,
         showBackdrop: true,
         cssClass: "my-custom-modal-css",
         backdropDismiss: true,
@@ -112,7 +119,7 @@ export class HomePage implements OnInit{
   async approve(trans:any){
     let approve = await this.alertController.create({
       header: "Approve Escrow Payment?",
-      message: "Please confirm payment sshould be released to receiver",
+      message: "Please confirm payment should be released to receiver",
       buttons:[{
         text: "Confirm",
         handler: ()=>{

@@ -1,13 +1,9 @@
 import http.client
 from os import getenv
-import dotenv
 from flask import json
 from user import User
 from random import randint
 import time
-
-# dotenv.load_dotenv()
-# api_key = getenv('API_KEY')
 
 #Dict of created accounts
 accounts_dict = {}
@@ -16,7 +12,7 @@ account_number = 00000
 #Tatum request API calls
 def create_user_account(username, api_key):
     #create user account
-    global account_number
+    global account_number, accounts_dict
     account_number += 1
     conn = http.client.HTTPSConnection("api-eu1.tatum.io")
     payload = "{\"currency\":\"VC_ZAR\",\"customer\":{\"accountingCurrency\":\"ZAR\",\"customerCountry\":\"SA\",\"externalId\":\""+username+"\",\"providerCountry\":\"US\"},\"compliant\":false,\"accountCode\":\"TRANSACTIONAL_ACCOUNT\",\"accountingCurrency\":\"ZAR\",\"accountNumber\":\""+str(account_number)+"\"}"    
@@ -34,8 +30,9 @@ def create_user_account(username, api_key):
     #return user
     return user_object.user
 
-def get_contacts(username, api_key):
+def get_contacts(username):
     #search user in the user dict
+    global accounts_dict
     user = accounts_dict[username]
     #return the users contacts
     print('User contacts: ', user.user['contacts'])

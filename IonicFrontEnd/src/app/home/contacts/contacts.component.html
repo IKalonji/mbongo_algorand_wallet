@@ -1,0 +1,18 @@
+
+<ion-content>
+  <ion-list lines="full">
+    <ion-list-header lines="full" style="text-align: center;">
+      <ion-label>Contact List</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let contact of contactList">
+      <ion-label>User: {{contact.name}}</ion-label>
+      <ion-label>Account: {{contact.account}}</ion-label>
+      <ion-button (click)="payAgain()" expand="block" fill="solid" shape="round" size="small">
+        Pay Contact
+      </ion-button>
+    </ion-item>
+    <div *ngIf="contactsList.length == 0" style="text-align: center;">
+      <ion-label>No Contacts Added</ion-label>
+    </div>
+  </ion-list>
+</ion-content>

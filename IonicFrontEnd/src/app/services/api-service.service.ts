@@ -46,19 +46,21 @@ export class ApiServiceService {
     return this.http.post(this.API_URL+`/top-up/`+this.username, body);
   }
 
-  postPayment(payAmount: string, receiver: string) {
+  postPayment(payAmount: string, receiver: string, username:string) {
     let body = {
       "amount": payAmount,
       "receiver": receiver,
+      "username": username,
       "type": "NORMAL"
     }
     return this.http.post(this.API_URL+`/payment/`+this.username, body);
   }
 
-  postEscrowPayment(payAmount: string, receiver: string) {
+  postEscrowPayment(payAmount: string, receiver: string, username:string) {
     let body = {
       "amount": payAmount,
       "receiver": receiver,
+      "username": username,
       "type": "ESCROW"
     }
     return this.http.post(this.API_URL+`/escrow-pay/`+this.username, body)

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { ApiServiceService } from 'src/app/services/api-service.service';
 
 
@@ -17,9 +17,10 @@ export class ScanPaymentComponent implements OnInit {
 
   constructor(private barcodeScanner: BarcodeScanner,
     private toastController: ToastController,
-    private alertPaymentMethod: AlertController,
+    private alertController: AlertController,
     private apiService: ApiServiceService,
-    private loadingController: LoadingController) { } 
+    private loadingController: LoadingController,
+    private modalController: ModalController) { } 
 
   ngOnInit() {
     
@@ -31,21 +32,23 @@ export class ScanPaymentComponent implements OnInit {
       // console.log('Barcode data', barcodeData);
       this.data = barcodeData;
       this.jsonData = JSON.parse(this.data);
-      this.paymentType(this.jsonData.receiver)
+      this.paymentType(this.jsonData.receiver, this.jsonData.username)
+      this.modalController.dismiss()
     }).catch(err => {
-      // console.log('Error', err);
+      console.log('Error', err);
+      this.showError(err);
     });
   }
 
-  async paymentType(receiver) {
-    let alertPaymentMethod = await this.alertPaymentMethod.create(
+  async paymentType(receiver:string,username:string ) {
+    let alertPaymentMethod = await this.alertController.create(
       {
         header: "Please select payment type",
         buttons:[{
           text: 'IMMEDIATE',
           handler: ()=>{
             this.showProgressSpinner();
-            this.apiService.postPayment(this.amount, receiver).subscribe(data => {
+            this.apiService.postPayment(this.amount, receiver, username).subscribe(data => {
               console.log(data)
               this.loadingController.dismiss()
               this.showSuccess()
@@ -55,7 +58,7 @@ export class ScanPaymentComponent implements OnInit {
           text: 'ESCROW',
           handler: ()=>{
             this.showProgressSpinner()
-            this.apiService.postEscrowPayment(this.amount, receiver).subscribe(data => {
+            this.apiService.postEscrowPayment(this.amount, receiver, username).subscribe(data => {
               console.log(data);
               this.loadingController.dismiss()
               this.showSuccess()
@@ -82,10 +85,21 @@ export class ScanPaymentComponent implements OnInit {
     let toast = await this.toastController.create(
       {
         header: "Success!",
-        message: "Payment completed!"
+        message: "Payment completed!",
+        duration: 3000
       }
     )
     await toast.present()
+  }
+
+  async showError(msg: string){
+    let errorToast = await this.toastController.create(
+      {
+        message: msg,
+        duration: 3000
+      }
+    )
+    await errorToast.present();
   }
 
 }
