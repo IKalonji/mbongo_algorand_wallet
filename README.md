@@ -196,7 +196,7 @@ Please install the below required software in order to run the project.
 
 [Video Demo](https://www.youtube.com/watch?v=T4ouxpaDafk)
 
-<iframe width="1016" height="530" src="https://www.youtube.com/embed/T4ouxpaDafk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![DEMO](https://img.youtube.com/vi/T4ouxpaDafk/0.jpg)](https://www.youtube.com/watch?v=T4ouxpaDafk)
 
 _Please refer to the [Documentation](https://github.com/IKalonji/mbongo_algorand_wallet/blob/main/README.md)_
 
