@@ -67,7 +67,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://github.com/IKalonji/mbongo_algorand_wallet/blob/main/README.md)
 
-Mbongo is a micro P2P custodial payment wallet that enables Africans to inter-transact digitaly by using a simple top up voucher. Currently 90% of Afiranc relay on cash and only 70% have acive Bank acounts. Making it increasingly difficult to move money around.
+Mbongo is a micro P2P custodial payment wallet that enables Africans to inter-transact digitaly by using a simple top up voucher. Currently 60% of Africa relay on cash and only 70% have acive Bank acounts. Making it increasingly difficult to move money around.
 
 Here's why:
 * Mbongo, is secure and payments are immediate and seamless, using the virtual currency. 
