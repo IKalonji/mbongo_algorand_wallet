@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { ApiServiceService } from 'src/app/services/api-service.service';
 
@@ -11,7 +11,7 @@ import { ApiServiceService } from 'src/app/services/api-service.service';
 })
 export class ScanPaymentComponent implements OnInit {
   
-  data: any;
+  data: string = '';
   jsonData: any;
   amount: string;
 
@@ -27,10 +27,20 @@ export class ScanPaymentComponent implements OnInit {
   }
 
   scanner(){
-    this.data = null;
-    this.barcodeScanner.scan().then(barcodeData => {
+    // this.data = null;
+    const options: BarcodeScannerOptions = {
+      preferFrontCamera: false,
+      showFlipCameraButton: true,
+      showTorchButton: true,
+      torchOn: false,
+      prompt: 'Place a QR Code inside the scan area',
+      resultDisplayDuration: 1000,
+      formats: 'QR_CODE',
+      orientation: 'portrait',
+    };
+    this.barcodeScanner.scan(options).then(barcodeData => {
       // console.log('Barcode data', barcodeData);
-      this.data = barcodeData;
+      this.data = barcodeData.text;
       this.jsonData = JSON.parse(this.data);
       this.paymentType(this.jsonData.receiver, this.jsonData.username)
       this.modalController.dismiss()
@@ -96,7 +106,7 @@ export class ScanPaymentComponent implements OnInit {
     let errorToast = await this.toastController.create(
       {
         message: msg,
-        duration: 3000
+        duration: 5000
       }
     )
     await errorToast.present();

@@ -127,6 +127,7 @@ export class HomePage implements OnInit{
           this.apiService.postEscrowClear(trans.counterAccount).subscribe(data => {
             console.log(data)
             this.loadingController.dismiss()
+            this.getBalAndTransactions()
           });
         }
       }, "Cancel"]
@@ -135,15 +136,11 @@ export class HomePage implements OnInit{
   }
 
   getTransactions() {
-    let transactions = this.apiService.getTransactions().subscribe(data =>{
-      this.transactionCards = data['transactions'];
-      // console.log(transactions);
-    });
+    this.apiService.getTransactions().subscribe(data =>{ this.transactionCards = data['transactions'];});
   }
 
   updateBalance() {
     this.balanceData = this.apiService.getBalance().subscribe(data =>{
-      // console.log(data)
       this.balance = data['balance'].accountBalance;
       this.available = data['balance'].availableBalance;
     });

@@ -90,7 +90,7 @@
           <ion-label>Amount: </ion-label>
           <ion-label [ngClass]="{'receipt' : trans.amount[0]!='-', 'payment' : trans.amount[0]=='-'}" style="font-weight: 600;">{{trans.amount}}</ion-label>
         </div>
-        <ion-button *ngIf="trans.type == 'ESCROW' " (click)="approve(trans)" expand="block" fill="solid" shape="">
+        <ion-button *ngIf="trans.type == 'ESCROW' && trans.amount[0]=='-' " (click)="approve(trans)" expand="block" fill="solid" shape="">
           <ion-label>Approve</ion-label>
         </ion-button>
       </ion-card-content>

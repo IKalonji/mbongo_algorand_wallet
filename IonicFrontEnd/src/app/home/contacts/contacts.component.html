@@ -4,7 +4,7 @@
     <ion-list-header lines="full" style="text-align: center;">
       <ion-label>Contact List</ion-label>
     </ion-list-header>
-    <ion-item *ngFor="let contact of contactList">
+    <ion-item *ngFor="let contact of displayContact">
       <ion-label>User: {{contact.name}}</ion-label>
       <ion-label>Account: {{contact.account}}</ion-label>
       <ion-button (click)="payAgain(contact)" expand="block" fill="solid" shape="round" size="small">

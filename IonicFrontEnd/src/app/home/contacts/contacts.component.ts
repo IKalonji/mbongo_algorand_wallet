@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
-import { toastController } from '@ionic/core';
 import { ApiServiceService } from 'src/app/services/api-service.service';
 
 @Component({
@@ -11,6 +10,7 @@ import { ApiServiceService } from 'src/app/services/api-service.service';
 export class ContactsComponent implements OnInit {
 
   contactsList: any[] = [];
+  displayContact: contact[] = [];
 
   constructor(private apiService: ApiServiceService,
     private alertController: AlertController,
@@ -23,10 +23,14 @@ export class ContactsComponent implements OnInit {
   getContacts(){
     this.apiService.getContacts().subscribe(data =>{
       this.contactsList = data['user_contacts'];
+      this.contactsList.forEach(element => {
+        let contact: contact = {account:element['account'], name:element['name']}
+        this.displayContact.push(contact)
+      });
     })
   }
 
-  async payAgain(userToPay:any){
+  async payAgain(userToPay:contact){
     let alertToPay = await this.alertController.create(
       {
         header: "Enter amount to pay",
@@ -41,7 +45,7 @@ export class ContactsComponent implements OnInit {
           {
             text: "Confirm",
             handler: (alertData) => {
-              this.apiService.postPayment(alertData.amount, userToPay['account'], userToPay['name']).subscribe(data =>
+              this.apiService.postPayment(alertData.amount, userToPay.account, userToPay.name).subscribe(data =>
                 {
                   this.toastPayment();
                 }
@@ -51,10 +55,12 @@ export class ContactsComponent implements OnInit {
         ]
       }
     )
+
+    await alertToPay.present()
   }
 
   async toastPayment(){
-    let payment = await toastController.create({
+    let payment = await this.toastController.create({
       message: "Payment made",
       duration: 3000
     })
@@ -62,4 +68,9 @@ export class ContactsComponent implements OnInit {
     await payment.present()
   }
 
+}
+
+export interface contact{
+  account:string,
+  name:string
 }
