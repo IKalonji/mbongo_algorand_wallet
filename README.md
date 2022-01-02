@@ -1,22 +1,5 @@
 <div id="top"></div>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
 
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -41,7 +24,7 @@
     <a href="https://github.com/IKalonji/mbongo_algorand_wallet/blob/main/README.md"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://www.youtube.com/watch?v=T4ouxpaDafk">View Demo</a>
     ·
     <a href="https://github.com/IKalonji/mbongo_algorand_wallet/issues">Report Bug</a>
     ·
@@ -111,7 +94,8 @@ Mbongo eliminates the need for a bank accounts, and the use of cash in the Marke
 
 ### Notice
 
-This project is not audited and should not be used in a production environment.
+1. This project is not audited and should not be used in a production environment.
+2. The project was build on Windows and has not been tested on any Linux distro, but it should run since the tools used are cross platform. 
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -120,7 +104,7 @@ Follow the steps below on how to run the project.
 
 ### Prerequisites
 
-Please install the required software in order to run the project.
+Please install the below required software in order to run the project.
 
 * NodeJs
   [NodeJS](https://nodejs.org/about/releases)
@@ -146,9 +130,9 @@ Please install the required software in order to run the project.
 * Install Android Studio
   [Android Studio](https://developer.android.com/studio)
 
-### Installation
+* Physical Android device (access to camera will be required)
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+### Installation
 
 1. Get a free Tatum API Key at [Tatum](https://tatum.io/)
 2. Clone the repo
@@ -194,7 +178,9 @@ _Below is an example of how you can instruct your audience on installing and set
   ```sh
   ionic capacitor build android
   ```
- Android Studio should open automatically once the build is complete. If not open the Ionic/Frontendandroid folder in Android Studio.
+
+  Android Studio should open automatically once the build is complete. If not open the Ionic/Frontendandroid folder in Android Studio.
+
 8. Finally, use one of the two options to run the app:
   * Option 1:
     In Android Studio, click on the build tab in the navigation bar and select 'Generate APK'. Complete the steps and navigate to the folder where the APK was generated. Send the APK to your Android device and install. 
@@ -208,7 +194,9 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+[Video Demo](https://www.youtube.com/watch?v=T4ouxpaDafk)
+
+<iframe width="1016" height="530" src="https://www.youtube.com/embed/T4ouxpaDafk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 _Please refer to the [Documentation](https://github.com/IKalonji/mbongo_algorand_wallet/blob/main/README.md)_
 
@@ -274,16 +262,9 @@ Project Link: [https://github.com/IKalonji/mbongo_algorand_wallet](https://githu
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
+* [Tatum](https://tatum.io)
+* [Algorand](https://www.algorand.com/)
+* [Gitcoin](https://gitcoin.co/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
