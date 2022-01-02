@@ -136,9 +136,9 @@ Please install the required software in order to run the project.
   ```
 
 * ionic
-```sh
-  npm install -g @ionic/cli
-```
+  ```sh
+    npm install -g @ionic/cli
+  ```
 
 * Install Python Python
   [Python](https://www.python.org/)
@@ -191,9 +191,9 @@ _Below is an example of how you can instruct your audience on installing and set
   };
   ```
 7. Now, we can build the frontend with Ionic and create an APK with Android Studio. In the terminal run:
-```sh
-ionic capacitor build android
-```
+  ```sh
+  ionic capacitor build android
+  ```
  Android Studio should open automatically once the build is complete. If not open the Ionic/Frontendandroid folder in Android Studio.
 8. Finally, use one of the two options to run the app:
   * Option 1:
