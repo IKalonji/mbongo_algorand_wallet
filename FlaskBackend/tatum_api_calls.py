@@ -136,7 +136,7 @@ def escrow_payment(account_id, request_body, api_key):
     amount = request_body["amount"]
     receiver = request_body["receiver"]
     #call transfer api
-    payment_response = payment_transfer(account_id, request_body)
+    payment_response = payment_transfer(account_id, request_body, api_key)
     #block amount in receivers account
     if payment_response['reference']:
         conn = http.client.HTTPSConnection("api-eu1.tatum.io")
