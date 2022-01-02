@@ -84,14 +84,14 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://github.com/IKalonji/mbongo_algorand_wallet/blob/main/README.md)
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+Mbongo is a micro P2P custodial payment wallet that enables Africans to inter-transact digitaly by using a simple top up voucher. Currently 90% of Afiranc relay on cash and only 70% have acive Bank acounts. Making it increasingly difficult to move money around.
 
 Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+* Mbongo, is secure and payments are immediate and seamless, using the virtual currency. 
+* The escrow payment option provides a secure enviroment for payments when paying for future goods or services
+* Immediate access to all your Mbongo contacts.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+Mbongo eliminates the need for a bank accounts, and the use of cash in the Market place as well as daily use of cash.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -103,49 +103,106 @@ Of course, no one template will serve all projects since your needs may be diffe
 * [Ionic](https://ionicframework.com/)
 * [Angular](https://angular.io/)
 * [Python](https://www.python.org/)
-* [Angular](https://angular.io/)
 * [Android Studio](https://developer.android.com/studio)
 * [Ngrok](https://ngrok.com/)
 * [Algorand](https://www.algorand.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### Notice
 
+This project is not audited and should not be used in a production environment.
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Follow the steps below on how to run the project.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+Please install the required software in order to run the project.
+
+* NodeJs
+  [NodeJS](https://nodejs.org/about/releases)
+
 * npm
   ```sh
   npm install npm@latest -g
   ```
 
+* angular
+  ```sh
+  npm install -g @angular/cli
+  ```
+
+* ionic
+```sh
+  npm install -g @ionic/cli
+```
+
+* Install Python Python
+  [Python](https://www.python.org/)
+
+* Install Android Studio
+  [Android Studio](https://developer.android.com/studio)
+
 ### Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Get a free Tatum API Key at [Tatum](https://tatum.io/)
 2. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/IKalonji/mbongo_algorand_wallet.git
    ```
-3. Install NPM packages
+3. cd into the project and run the below command to install the requied Python modules
    ```sh
-   npm install
+   cd mbongo-algo-wallet
+   pip install -r requirements.txt
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+4. cd into the Backend folder and run the server. (KEEP THE SERVER RUNNING)
+   ```sh
+   cd FlaskBackend
+   python app.py
    ```
+5. Take note of the Tunnel URL in the terminal output, we'll use that for our server endpoint. Example:
+  ```sh
+  * Tunnel URL: http://3d5d-197-184-183-154.ngrok.io -(COPY THIS)
+  * Serving Flask app 'app' (lazy loading)
+  * Environment: production
+    WARNING: This is a development server. Do not use it in a production deployment.
+    Use a production WSGI server instead.
+  * Debug mode: off
+  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+  ```
+6. cd into the Ionic frontend install dependecies then paste your Tunnel URL as well as the Tatum API key in the environment.ts as well as the enviroment.prod.ts files, Example:
+  ```sh
+  cd ..
+  cd IonicFrontend
+  npm install
+  ```
+  Then enter the details into the environment.ts as well as the enviroment.prod.ts file, Example.
+  ```ts
+  export const environment = {
+  production: false,
+  urlLocal: "ENTER_URL_HERE",
+  urlDeployed: "ENTER_URL_HERE",
+  API_KEY: "ENTER_API_KEY_HERE"
+  };
+  ```
+7. Now, we can build the frontend with Ionic and create an APK with Android Studio. In the terminal run:
+```sh
+ionic capacitor build android
+```
+ Android Studio should open automatically once the build is complete. If not open the Ionic/Frontendandroid folder in Android Studio.
+8. Finally, use one of the two options to run the app:
+  * Option 1:
+    In Android Studio, click on the build tab in the navigation bar and select 'Generate APK'. Complete the steps and navigate to the folder where the APK was generated. Send the APK to your Android device and install. 
+  * Option 2:
+    Connect an Android device to your PC and select your device under the devices section of the navigation bar, then run the app.
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- USAGE EXAMPLES -->
@@ -153,7 +210,7 @@ _Below is an example of how you can instruct your audience on installing and set
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://github.com/IKalonji/mbongo_algorand_wallet/blob/main/README.md)_
+_Please refer to the [Documentation](https://github.com/IKalonji/mbongo_algorand_wallet/blob/main/README.md)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
