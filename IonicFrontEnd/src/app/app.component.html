@@ -1,4 +1,25 @@
 <ion-app>
+  <div *ngIf="!signedIn" style="text-align:center;margin:auto; width: 99%; height: 99%;border: 3px solid darkgray;">
+    <div>
+      <img src="./../assets/img/Unstoppable Domains-Sign-Light.svg" alt="" style="height: 40%;">
+    </div>
+    <div>
+      <label style="font-weight: 700;font-size: larger;">
+        Login with Unstoppable
+      </label>
+    </div>
+    <br>
+    <div>
+      <span>
+        <input type="text" [(ngModel)]="domain" style="text-align: center;">
+      </span>
+    </div>
+    <br>
+    <br>
+    <button (click)="setAccount()">
+      <img src="./../assets/img/login_with_unstoppable.png" alt="" style="width: 100%;">
+    </button>
+  </div>
   <ion-router-outlet *ngIf="signedIn"></ion-router-outlet>
 </ion-app>
 

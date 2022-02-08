@@ -6,7 +6,13 @@ export const environment = {
   production: false,
   urlLocal: "",
   urlDeployed: "",
-  API_KEY: ""
+  API_KEY: "",
+  uauth: {
+    clientID: "",
+    clientSecret: "",
+    callbackURL: "http://localhost:8100/callback"
+  }
+
 };
 
 /*

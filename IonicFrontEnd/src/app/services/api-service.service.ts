@@ -73,4 +73,11 @@ export class ApiServiceService {
     return this.http.post(this.API_URL+`/escrow-clear/`+this.username, body);
   }
 
+  connectToUnstoppable(domain:string){
+    let body = {
+      login_hint: domain
+    }
+    return this.http.post("http://127.0.0.1:6000/login", body);
+  }
+
 }

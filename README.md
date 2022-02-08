@@ -19,11 +19,13 @@
   <h3 align="center">Mbongo Algo Wallet</h3>
 
   <p align="center">
-    An awesome P2P payments and escrow wallet!
+    An awesome P2P payments and escrow wallet with Unstoppable Domains Integration! 
     <br />
     <a href="https://github.com/IKalonji/mbongo_algorand_wallet/blob/main/README.md"><strong>Explore the docs »</strong></a>
     <br />
     <br />
+    <a href="https://youtu.be/GqT20HSzQGY">Unstoppable Domains Integration Demo</a>
+    .
     <a href="https://www.youtube.com/watch?v=T4ouxpaDafk">View Demo</a>
     ·
     <a href="https://github.com/IKalonji/mbongo_algorand_wallet/issues">Report Bug</a>
@@ -89,6 +91,7 @@ Mbongo eliminates the need for a bank accounts, and the use of cash in the Marke
 * [Android Studio](https://developer.android.com/studio)
 * [Ngrok](https://ngrok.com/)
 * [Algorand](https://www.algorand.com/)
+* [Unstoppable Domains](https://docs.unstoppabledomains.com/login-with-unstoppable/login-integration-guides)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -134,6 +137,8 @@ Please install the below required software in order to run the project.
 
 ### Installation
 
+#### NOTE: Please request CLIENT ID and CLIENT SECRET in order to test with the Unstoppable Domains integration.  
+
 1. Get a free Tatum API Key at [Tatum](https://tatum.io/)
 2. Clone the repo
    ```sh
@@ -165,6 +170,14 @@ Please install the below required software in order to run the project.
   cd IonicFrontend
   npm install
   ```
+  Then cd into UDLogin_Server and run npm install and run the login server:
+  ```sh
+  cd ..
+  cd UDLoginServer
+  npm install
+  ts-node index.ts
+  ```
+
   Then enter the details into the environment.ts as well as the enviroment.prod.ts file, Example.
   ```ts
   export const environment = {
@@ -194,7 +207,11 @@ Please install the below required software in order to run the project.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+[Unstoppable Domains Integration](https://youtu.be/GqT20HSzQGY)
+
 [Video Demo](https://www.youtube.com/watch?v=T4ouxpaDafk)
+
+[![DEMO](https://img.youtube.com/vi/T4ouxpaDafk/0.jpg)](https://youtu.be/GqT20HSzQGY)
 
 [![DEMO](https://img.youtube.com/vi/T4ouxpaDafk/0.jpg)](https://www.youtube.com/watch?v=T4ouxpaDafk)
 
@@ -262,6 +279,7 @@ Project Link: [https://github.com/IKalonji/mbongo_algorand_wallet](https://githu
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
+* [Unstoppable Domains](https://docs.unstoppabledomains.com/login-with-unstoppable/login-integration-guides)
 * [Tatum](https://tatum.io)
 * [Algorand](https://www.algorand.com/)
 * [Gitcoin](https://gitcoin.co/)
